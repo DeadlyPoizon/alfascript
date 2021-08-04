@@ -22,7 +22,7 @@ while running == True:
 	  sys.exit(1)	
 	print("Your adapter name is " + adaptername)
 	print("\033[1;37;40mWelcome to AlphaScript - the quick and easy tool to setup your Ralink RTL8812au chipset WIFI Adapter.. or more.")
-	print("You have 	'three' options:")
+	print("You have 'three' options:")
 	print("\033[1;32;40m 1. Configure adapter and activate monitor mode")
 	print("\033[1;31;40m 2. Disable monitor mode and reactiate NetworkManager")
 	print("\033[1;33;40m 3. Exit the tool\n\033[1;37;40m")
@@ -64,4 +64,8 @@ while running == True:
 			channel = raw_input("What channel? (write as [-c#]) " )
 			bssid = raw_input("What BSSID? ")
 			subprocess.call(['gnome-terminal', '--window', '--', 'airodump-ng', channel, '-w', 'capture', '-d', bssid, adaptername])
+		elif option == "cry":
+			accesspoint = raw_input("What is the AP's BBSID? (Same BBSID as before) ")
+			client = raw_input("What is the client's BBSID? ")
+			subprocess.call(['gnome-terminal', '--window', '--', 'aireplay-ng', '--deauth', '0', '-a', accesspoint, '-c', client, adaptername])
 	AlphaScript()
